@@ -71,6 +71,8 @@ namespace winPEAS
                 Thread.Sleep(700);
         }
 
+        private Beaprint(){}
+
         public static void PrintInit()
         {
             if (Program.banner)
@@ -78,15 +80,15 @@ namespace winPEAS
 
             System.Console.WriteLine(YELLOW + "  WinPEAS " + GREEN + Program.version + NOCOLOR + YELLOW + " by carlospolop" + NOCOLOR);
             System.Console.WriteLine();
-            PrintLeyend();
+            PrintLegend();
             System.Console.WriteLine();
             LinkPrint("https://book.hacktricks.xyz/windows/checklist-windows-privilege-escalation", "You can find a Windows local PE Checklist here:");
 
         }
 
-        static void PrintLeyend()
+        static void PrintLegend()
         {
-            System.Console.WriteLine(YELLOW + "  [+] " + GREEN + "Leyend:" + NOCOLOR);
+            System.Console.WriteLine(YELLOW + "  [+] " + GREEN + "Legend:" + NOCOLOR);
             System.Console.WriteLine(RED + "         Red" + GRAY + "                Indicates a special privilege over an object or something is misconfigured" + NOCOLOR);
             System.Console.WriteLine(GREEN + "         Green" + GRAY + "              Indicates that some protection is enabled or something is well configured" + NOCOLOR);
             System.Console.WriteLine(CYAN + "         Cyan" + GRAY + "               Indicates active users" + NOCOLOR);
@@ -99,10 +101,9 @@ namespace winPEAS
         {
             System.Console.WriteLine(YELLOW + "  [*] " + GREEN + "WinPEAS is a binary to enumerate possible paths to escalate privileges locally" + NOCOLOR);
             System.Console.WriteLine(LBLUE + "        quiet" + GRAY + "             Do not print banner" + NOCOLOR);
-            System.Console.WriteLine(LBLUE + "        searchfast" + GRAY + "        Avoid sleeping while searching files (notable amount of resources)" + NOCOLOR);
-            System.Console.WriteLine(LBLUE + "        searchall" + GRAY + "         Search all known filenames whith possible credentials (coul take some mins)" + NOCOLOR);
+            System.Console.WriteLine(LBLUE + "        searchslow" + GRAY + "        Sleep while searching files to not consume a notable amount of resources" + NOCOLOR);
             System.Console.WriteLine(LBLUE + "        cmd" + GRAY + "               Obtain wifi, cred manager and clipboard information executing CMD commands" + NOCOLOR);
-            System.Console.WriteLine(LBLUE + "        notansi" + GRAY + "           Don't use ansi colors (all white)" + NOCOLOR);
+            System.Console.WriteLine(LBLUE + "        notcolor" + GRAY + "          Don't use ansi colors (all white)" + NOCOLOR);
             System.Console.WriteLine(LBLUE + "        systeminfo" + GRAY + "        Search system information" + NOCOLOR);
             System.Console.WriteLine(LBLUE + "        userinfo" + GRAY + "          Search user information" + NOCOLOR);
             System.Console.WriteLine(LBLUE + "        procesinfo" + GRAY + "        Search processes information" + NOCOLOR);
@@ -112,6 +113,7 @@ namespace winPEAS
             System.Console.WriteLine(LBLUE + "        windowscreds" + GRAY + "      Search windows credentials" + NOCOLOR);
             System.Console.WriteLine(LBLUE + "        browserinfo" + GRAY + "       Search browser information" + NOCOLOR);
             System.Console.WriteLine(LBLUE + "        filesinfo" + GRAY + "         Search files that can contains credentials" + NOCOLOR);
+            System.Console.WriteLine(LBLUE + "        wait" + GRAY + "              Wait for user input between checks" + NOCOLOR);
             System.Console.WriteLine(YELLOW + "        [+] " + LYELLOW + "By default all checks (except CMD checks) are executed" + NOCOLOR);
         }
 
@@ -128,10 +130,10 @@ namespace winPEAS
             System.Console.WriteLine(LCYAN + "  " + new String('=', halfTotal - toPrint.Length) + "(" + NOCOLOR + YELLOW + toPrint + LCYAN + ")" + new String('=', halfTotal - toPrint.Length) + NOCOLOR);
         }
 
-        public static void MainPrint(string toPrint, string attackid)
+        public static void MainPrint(string toPrint)
         {
             System.Console.WriteLine();
-            System.Console.WriteLine(YELLOW + "  [+] " + GREEN + toPrint + YELLOW + "(" + DGRAY + attackid + YELLOW + ")" + NOCOLOR);
+            System.Console.WriteLine(YELLOW + "  [+] " + GREEN + toPrint + NOCOLOR);
         }
 
         public static void LinkPrint(string link, string comment = "")

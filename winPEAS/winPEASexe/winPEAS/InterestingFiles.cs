@@ -11,6 +11,7 @@ namespace winPEAS
 {
     class InterestingFiles
     {
+        private InterestingFiles() {}
         public static List<string> GetUnattendedInstallFiles()
         { //From SharpUP
             List<string> results = new List<string>();
@@ -435,6 +436,23 @@ namespace winPEAS
                 Beaprint.GrayPrint("Error: " + ex);
             }
             return results;
+        }
+
+        public static string GetConsoleHostHistory()
+        {
+            string result = "";
+            try
+            {
+                
+                string searchLocation = String.Format("{0}\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadline\\ConsoleHost_history.txt", Environment.GetEnvironmentVariable("USERPROFILE"));
+                if (System.IO.File.Exists(searchLocation))
+                    result = searchLocation;
+            }
+            catch (Exception ex)
+            {
+                Beaprint.GrayPrint("Error: " + ex);
+            }
+            return result;
         }
 
         public static List<Dictionary<string, string>> GetRecycleBin()

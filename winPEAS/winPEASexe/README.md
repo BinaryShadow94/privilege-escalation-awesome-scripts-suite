@@ -10,13 +10,16 @@ Check also the **Local Windows Privilege Escalation checklist** from **[book.hac
 
 ## Quick Start
 
+**.Net >= 4.5 is required**
+
 Download the **[latest obfuscated version from here](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS/winPEASexe/winPEAS/bin/Obfuscated%20Releases)** or **compile it yourself** (read instructions for compilation).
 ```bash
-winpeas.exe cmd searchall searchfast #cmd commands, search all filenames and avoid sleepig (noisy - CTFs)
-winpeas.exe #Will execute all checks except the ones that use a CMD
+winpeas.exe cmd searchall #cmd commands, search all filenames and avoid sleepig (noisy - CTFs)
+winpeas.exe #Will execute all checks except the ones that use external Windows binaries
 winpeas.exe cmd #All checks
 winpeas.exe systeminfo userinfo #Only systeminfo and userinfo checks executed
 winpeas.exe notcolor #Do not color the output
+winpeas.exe cmd wait #cmd commands and wait between tests
 ```
 
 ## Basic information
@@ -28,6 +31,8 @@ It should take only a **few seconds** to execute almost all the checks and **som
 By default, the progam **sleeps 100ms** before start searching files in each directory. This is made to consume less resources (**stealthier**). You can **avoid this sleep using `searchfast` parameter**.
 
 
+The tool is based in **[SeatBelt](https://github.com/GhostPack/Seatbelt)**.
+
 ## Where are my COLORS?!?!?!
 
 The **ouput will be colored** using **ansi** colors. If you are executing `winpeas.exe` **from a Windows console**, you need to set a registry value to see the colors (and open a new CMD):
@@ -37,24 +42,23 @@ REG ADD HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1
 
 Below you have some indications about what does each color means exacty, but keep in mind that **Red** is for something interesting (from a pentester perspective) and **Green** is something well configured (from a defender perspective).
 
-The tool is based in **[SeatBelt](https://github.com/GhostPack/Seatbelt)**.
 
 ## Instructions to compile
 
-There was a time when **winpeas.exe was detected as malicious by Defender:(** But not anymore thanks to **dotfuscator**. 
+In order to compile an **ofuscated version** of Winpeas and bypass some AVs you need to ** install dotfuscator ** in *VisualStudio*. 
 
-This means that to **compile winpeas** you will need to **install dotfuscator** in *VisualStudio*. To install it *open VisualStudio --> Go to Search (CTRL+Q) --> Write "dotfuscator"* and just follow the instructions to install it.
+To install it *open VisualStudio --> Go to Search (CTRL+Q) --> Write "dotfuscator"* and just follow the instructions to install it.
 
 To use **dotfuscator** you will need to **create an account** *(they will send you an email to the address you set during registration*).
 
 Once you have installed and activated it you need to:
 1. **Compile** winpeas in VisualStudio
 2. **Open dotfuscator** app
-3. **Open** in dotfuscator **winPEAS.exe compiled** before and **Microsoft.Win32.TaskScheduler.dll** (is in the same folder as winPEAS.exe)
+3. **Open** in dotfuscator **winPEAS.exe compiled**
 4. Click on **Build**
 5. The **single, minimized and obfuscated binary** will appear in a **folder called Dotfuscator inside the folder were winPEAS.exe** and the DLL were (this location will be saved by dotfuscator and by default all the following builds will appear in this folder).
 
-**I'm sorry that all of this is necessary but is worth it. Dotfuscator minimizes the size of the executable and obfuscates the code** (F\*\*k you Defender).
+**I'm sorry that all of this is necessary but is worth it. Dotfuscator minimizes a bit the size of the executable and obfuscates the code**.
 
 ![](https://raw.githubusercontent.com/carlospolop/privilege-escalation-awesome-scripts-suite/master/winPEAS/winPEASexe/images/dotfuscator.PNG)
 
@@ -164,13 +168,6 @@ Once you have installed and activated it you need to:
 
 If you want to **add something** and have **any cool idea** related to this project, please let me know it in the **telegram group https://t.me/peass** or using **[github issues](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/issues)** and we will update the master version.
 
-## Please, if this tool has been useful for you consider to donate
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DED2HWDYLFT2C&source=url)
-
-## Looking for a useful Privilege Escalation Course?
-
-Contact me and ask about the **Privilege Escalation Course** I am preparing for attackers and defenders (**100% technical**).
 
 ## TODO
 
